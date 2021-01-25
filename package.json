@@ -5,7 +5,7 @@
   "main": "indexStorage.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "frpm -i indexstorage"
+    "postinstall": "frpm -l indexstorage"
   },
   "repository": {
     "type": "git",
