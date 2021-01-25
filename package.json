@@ -27,6 +27,6 @@
     "indexStorage.min.js"
   ],
   "dependencies": {
-    "frpm": "0.0.3"
+    "frpm": "^0.0.7"
   }
 }
