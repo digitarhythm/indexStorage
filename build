@@ -1,0 +1,11 @@
+#/usr/bin/env bash
+
+OPT=$1
+
+if [ "$1" = "-w" ]; then
+  terffee -wc ./src/indexStorage.coffee
+else
+  terffee -nc ./src/indexStorage.coffee
+  terffee -nmc ./src/indexStorage.coffee
+fi
+

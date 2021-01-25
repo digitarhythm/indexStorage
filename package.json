@@ -1,0 +1,28 @@
+{
+  "name": "indexstorage",
+  "version": "0.0.1",
+  "description": "Alternative localStorage",
+  "main": "indexStorage.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitarhythm/indexStorage.git"
+  },
+  "keywords": [
+    "localStorage",
+    "WebStorage",
+    "IndexedDB"
+  ],
+  "author": "Hajime Oh-yake",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/digitarhythm/indexStorage/issues"
+  },
+  "homepage": "https://github.com/digitarhythm/indexStorage#readme",
+  "include": [
+    "indexStorage.js",
+    "indexStorage.min.js"
+  ]
+}
