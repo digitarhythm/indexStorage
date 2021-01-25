@@ -4,7 +4,8 @@
   "description": "Alternative localStorage",
   "main": "indexStorage.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "frpm -i indexstorage"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "include": [
     "indexStorage.js",
     "indexStorage.min.js"
-  ]
+  ],
+  "dependencies": {
+    "frpm": "0.0.3"
+  }
 }
