@@ -188,12 +188,11 @@ class indexStorage
   #=====================================
   # Delete database
   #=====================================
-  clear: ->
+  clear:(storename="indexStorage") ->
     return new Promise (resolve, reject) =>
-      try
-        @__indexDBObj.deleteDatabase(@__dbname)
-        @__database = undefined
-        resolve(true)
-      catch
-        reject(false)
+      await @__connectDB()
+      transaction = @__database.transaction([storename], "readwrite")
+      objectStore = transaction.objectStore(storename)
+      request = objectStore.clear()
+      resolve(true)
 

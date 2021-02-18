@@ -24,8 +24,5 @@
   "include": [
     "indexStorage.js",
     "indexStorage.min.js"
-  ],
-  "dependencies": {
-    "frpm": "^0.0.5"
-  }
+  ]
 }
