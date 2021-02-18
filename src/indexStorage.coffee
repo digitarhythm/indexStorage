@@ -72,7 +72,7 @@ class indexStorage
   #=====================================
   __addKeylist:(key) ->
     return new Promise (resolve, reject) =>
-      keylist = await @getItem("keylist", "preference")
+      keylist = await @getItem("keylist", "preference") || []
       if (keylist.indexOf(key) < 0)
         keylist.push(key)
         await @setItem("keylist", keylist, "preference")
@@ -83,7 +83,7 @@ class indexStorage
   #=====================================
   __removeKeylist:(key) ->
     return new Promise (resolve, reject) =>
-      keylist = await @getItem("keylist", "preference")
+      keylist = await @getItem("keylist", "preference") || []
       index = keylist.indexOf(key)
       if (index >= 0)
         keylist.splice(index, 1)
@@ -119,7 +119,7 @@ class indexStorage
   key:(index) ->
     return new Promise (resolve, reject) =>
       try
-        keylist = await @getItem("keylist", "preference")
+        keylist = await @getItem("keylist", "preference") || []
         key = keylist[parseInt(index)]
         resolve(key)
       catch e
@@ -186,9 +186,24 @@ class indexStorage
         resolve(true)
 
   #=====================================
-  # Delete database
+  # clear all data
   #=====================================
-  clear:(storename="indexStorage") ->
+  clear: ->
+    return new Promise (resolve, reject) =>
+      ret  = await @__clearObjectStore("indexStorage")
+      ret |= await @__clearObjectStore("preference")
+      resolve(ret)
+
+  #=====================================
+  # database delete
+  #=====================================
+  delete:(database=@__dbname) ->
+    @__indexDBObj.deleteDatabase(database)
+
+  #=====================================
+  # clear all data in object store
+  #=====================================
+  __clearObjectStore:(storename="indexStorage") ->
     return new Promise (resolve, reject) =>
       await @__connectDB()
       transaction = @__database.transaction([storename], "readwrite")
