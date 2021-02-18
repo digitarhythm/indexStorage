@@ -175,13 +175,13 @@ class indexStorage
       transaction = @__database.transaction([storename], "readwrite")
       objectStore = transaction.objectStore(storename)
       request = objectStore.delete(key)
-      await @__removeKeylist(key)
 
       request.onerror = (event) =>
         @__database.close()
         reject(false)
 
       request.onsuccess = (event) =>
+        await @__removeKeylist(key)
         @__database.close()
         resolve(true)
 
@@ -194,5 +194,12 @@ class indexStorage
       transaction = @__database.transaction([storename], "readwrite")
       objectStore = transaction.objectStore(storename)
       request = objectStore.clear()
-      resolve(true)
+
+      request.onerror = (event) =>
+        @__database.close()
+        reject(false)
+
+      request.onsuccess = (event) =>
+        @__database.close()
+        resolve(true)
 
