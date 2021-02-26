@@ -75,8 +75,10 @@ class indexStorage
       keylist = await @getItem("keylist", "preference") || []
       if (keylist.indexOf(key) < 0)
         keylist.push(key)
-        await @setItem("keylist", keylist, "preference")
-      resolve(keylist)
+        @setItem("keylist", keylist, "preference").then =>
+          resolve(keylist)
+      else
+        resolve(keylist)
 
   #=====================================
   # Remove key from keylist
@@ -155,14 +157,14 @@ class indexStorage
       transaction = @__database.transaction([storename], "readwrite")
       objectStore = transaction.objectStore(storename)
       objectStore.put({key: key, val: val})
-      if (storename == "indexStorage")
-        await @__addKeylist(key)
 
       transaction.onerror = (event) =>
         @__database.close()
         reject(false)
 
       transaction.oncomplete = (event) =>
+        if (storename == "indexStorage")
+          ret = await @__addKeylist(key)
         @__database.close()
         resolve(true)
 
